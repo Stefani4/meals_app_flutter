@@ -43,12 +43,10 @@ class _MealsByCategoryScreenState extends State<MealsByCategoryScreen> {
 
     final results = await api.searchMeals(q);
     final filtered = results.where((m) => m.name.toLowerCase().contains(q.toLowerCase())).where((m) => true).toList();
-// Since search.php doesn't return category in MealModel, we'll conservatively merge with existing _meals by id
     final idsInCategory = _meals.map((e) => e.id).toSet();
     setState(() {
       _filtered = results.where((r) => idsInCategory.contains(r.id)).toList();
       if (_filtered.isEmpty) {
-// fallback: filter local list by query
         _filtered = _meals.where((m) => m.name.toLowerCase().contains(q.toLowerCase())).toList();
       }
     });

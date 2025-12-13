@@ -48,8 +48,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       appBar: AppBar(
         title: Text('Categories'),
         actions: [
-          IconButton(onPressed: _openRandom, icon: Icon(Icons.shuffle)),
-        ],
+          IconButton(onPressed: _openRandom, icon: Icon(Icons.shuffle)
+          ),
+      IconButton(
+        icon: Icon(Icons.favorite, color: Colors.red),
+        onPressed: () {
+          Navigator.pushNamed(context, '/favorites');
+          // or FavoritesScreen.routeName if you registered it:
+          // Navigator.pushNamed(context, FavoritesScreen.routeName);
+        },
+      )],
       ),
       body: FutureBuilder<List<CategoryModel>>(
         future: categoriesFuture,
